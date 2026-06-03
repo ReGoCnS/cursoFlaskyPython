@@ -1,10 +1,12 @@
-from flask import Blueprint
+from flask import Blueprint, render_template, request,redirect,url_for
 
 taskRoute = Blueprint('task',__name__,url_prefix='/task')
 
 @taskRoute.route('/')
 def index():
-    return 'Index'  
+    return render_template('dashboard/task/index.html',task=task_list)
+
+task_list=['tarea1', 'tarea2', 'tarea3']
 
 @taskRoute.route('/<int:id>')
 def show(id:int):
@@ -12,12 +14,21 @@ def show(id:int):
 
 @taskRoute.route('/delete/<int:id>')
 def delete(id:int):
-    return 'Delete '+str(id)
+    del task_list[id]
+    return redirect(url_for('task.index'))
 
 @taskRoute.route('/create', methods=('GET','POST'))
 def create():
-    return 'Create '+str(id)
+    #print(request.form.get('task'))
+    task=request.form.get('task')
+    if task is not None:
+        task_list.append(task)
+        return redirect('/task')
+    return render_template('dashboard/task/create.html')
 
 @taskRoute.route('/update/<int:id>', methods=('GET','POST'))
 def update(id:int):
-    return 'Update '+str(id)
+    task=request.form.get('task')
+    if task is not None:
+        task_list[id]=task
+    return render_template('dashboard/task/update.html')

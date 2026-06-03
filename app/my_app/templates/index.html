@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Ejemplo desde html</h1>
+
+    {% if True and False %}
+    <p>{{ name }}</p>
+    {% else %}
+    <p>Sin datos</p>
+    {% endif %}
+
+    <ul>
+        {% for i in [1,2,3,4,5,6,7,8,9] %}
+        <li>{% if loop.first %}
+            Primero -
+            {% endif %}
+            {{loop.index0}}-{{i}}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h3>Filtros</h3>
+
+    <p>{{task | default('No hay tarea')}}</p>
+
+    {% if task | default ('No hay tarea') == 'Reyli' %}
+    <p>tenemos data</p>
+    {% endif %}
+
+
+
+    <p>{{5.123123|int}}</p>
+    <p>{{5.123123|float}}</p>
+    <p>{{[1,2,3,4,5,6,]|min}}</p><!--Sirve para identificar el numero con menos valor -->
+    <p>{{[1,2,3,4,5,6,]|max}}</p><!--Sirve para identificar el numero con mayor valor -->
+
+    <p>{{6.40|round}}</p><!--Sirve para redondear el valor -->
+    <p>{{6.60|round}}</p><!--Sirve para redondear el valor -->
+
+    <p>{{"Hola flask"|replace("Hola","Quiobolas")}}</p><!--Sirve para remplazar una palabra -->
+    <p>{{["Hola","flask","Sabotaje"]|join(" ")}}</p><!--Sirve para concatenar una palabra -->
+
+    <p>{{"HOLA COMO ESTAS"|lower}}</p><!--Sirve para hacer minuscula una palabra -->
+    <p>{{"HOLA COMO ESTAS"|upper}}</p><!--Sirve para hacer mayuscula una palabra -->
+
+    <p>{{"HOLA COMO ESTAS"|reverse}}</p><!--Sirve para hacer al reves una palabra -->
+    <p>{{"HOLA COMO ESTAS"|length}}</p><!--Sirve para contar la longitud en una palabra -->
+
+        <p>{% for e in [1,20,3,-4,50,6,7,80,-9]|sort() %}
+        {{e}}
+        {% endfor %}</p><!--Sirve para ordenar de menor a mayor los valores -->
+
+        <p>{% for j in [1,20,3,-4,50,6,7,80,-9]|sort(reverse=True) %}
+        {{j}}
+        {% endfor %}</p><!--Sirve para ordenar de mayor a menor los valores -->
+
+        <p>{% for h in [1,20,3,-4,50,6,7,80,-9]|slice(4) %}
+        {{h}}
+        {% endfor %}</p><!--Sirve para ordenar listas los valores -->
+
+
+        <h3>Variables</h3>
+
+            {% set var1='Flask' %}
+            {% set var2=var1 %}
+
+            {{var1}}
+            {{var2}}
+
+        
+        <p>
+        {% raw %}
+        var1
+        {{var1}}
+        <h3>Hola que tal</h3>
+        {% endraw %}</p> <!--Sirve para mostrar texto literal de Jinja sin que Flask lo ejecute -->
+
+
+
+        <p>{% macro suma(v1,v2) %}
+       {{v1}}+{{v2}}={{v1+v2}}
+        {% endmacro %}</p><!--Sirve para crear código HTML reutilizable -->
+        {{suma(4,3)}}
+
+
+
+</body>
+
+</html>
