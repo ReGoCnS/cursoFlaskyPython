@@ -13,7 +13,7 @@
 
             <!-- <link href="task/update{{ loop.index0 }}">edit -->
             <li><a href="{{ url_for('task.update',id=loop.index0) }}">edit</a></li>
-            <li></li><a href="{{ url_for('task.delete',id=loop.index0) }}">delete</a></li>
+            <li><a href="{{ url_for('task.delete',id=loop.index0) }}">delete</a></li>
 
         {% endfor %}
 

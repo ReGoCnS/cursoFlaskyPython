@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request,redirect,url_for
-
-from my_app.task import operation, models
+from task import models
+from my_app.task import operation
 
 taskRoute = Blueprint('task',__name__,url_prefix='/task')
 task_list=['tarea1', 'tarea2', 'tarea3']
@@ -9,8 +9,6 @@ task_list=['tarea1', 'tarea2', 'tarea3']
 @taskRoute.route('/')
 def index():
     #operation.create("tareaaa")
-    #operation.update(1,"tareaaa1.1")
-    #operation.getByID(1)
     return render_template('dashboard/task/index.html',task=task_list)
 
 
